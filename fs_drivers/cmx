@@ -1,3 +1,52 @@
+--[[
+            CMX Filesystem - Kind-of inspired by Minix
+
+    Dirty documentation:
+
+    return_type               filesystem:method(parameters)
+    ---------------------------------------------------------
+    int, table(block)         filesystem:resolveBlock(string: path)
+                Returns the inode number and the actual block, if the path is found (having a linked directory in the path works)
+
+
+    int, int                  filesystem:newBlock(string: type[, string: owner, string: owner_group])
+                Creates a new block (with a new inode) with the given type, owner and owner group, returns the inode number and block number
+
+
+    bool[, string]            filesystem:makeDir(string: path[, string: owner, string: owner_group])
+                Creates a new directory with the given owner and owner group, returns true if succeeded and false with error if not
+
+
+    bool[, string]            filesystem:makeLink(string: path, string: destination[, string: owner, string: owner_group])
+                Creates a new link to a directory(!) with the given owner and owner group
+
+
+    table                     filesystem:list(string: path)
+                Returns a list of every file in that directory (it automatically resolves links)
+
+
+    bool[, string]            filesystem:delete(string: path)
+                Deletes the desired file or EMPTY directory, returns true if succeeded and false with an error if not
+
+
+    handle[, string]          filesystem:open(string: path, char: mode[, string: owner, string: owner_group])
+                Opens the file in the desired mode (creates a new one with specified owner and owner group if non-existend), returns handle (int) or false with an error
+
+
+    bool[, string]            filesystem:write(int: handle, string: data)
+                Writes data to the open file handle, returns true if succeeded and false with an error if not
+
+
+    string                    filesystem:read(int: handle, int: amount)
+                Reads a specified amount of bytes from the open file handle, returns the data or nil
+
+
+    nil                       filesystem:close(int: handle)
+                Closes the file handle (if open)
+
+]]
+
+
 local filesystem = {}
 
 function filesystem:createNewHD(path)
