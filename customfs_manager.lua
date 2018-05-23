@@ -30,7 +30,7 @@
 ]]
 local drivers = {}
 
-fs_mgr = {}
+_G.fs_mgr = {}
 
 fs_mgr.path = "/hd"
 
