@@ -21,6 +21,17 @@
 
   driver:list
 
+  driver:getOwner	--Get the name of the user that owns that file/directory
+  driver:getOwnerGroup	--Get the name of the group that own(s) that file/directory
+  driver:setOwner	--Set the name of the user that owns that file/directory
+  driver:setOwnerGroup	--Set the name of the group(s) that own(s) that file/directory
+
+  driver:exists
+
+  driver:isDir
+
+  driver.split
+
   This does not mean that you can't add
   even more methods or have different parameters/return values,
   as this manager allows to use the raw driver aswell.
@@ -28,6 +39,7 @@
 ~Piorjade
 
 ]]
+
 local drivers = {}
 
 _G.fs_mgr = {}
@@ -88,4 +100,32 @@ end
 
 function fs_mgr.list(...)
   return fs_mgr.driver:list(...)
+end
+
+function fs_mgr.getOwner(...)
+  return fs_mgr.driver:getOwner(...)
+end
+
+function fs_mgr.getOwnerGroup(...)
+  return fs_mgr.driver:getOwnerGroup(...)
+end
+
+function fs_mgr.setOwner(...)
+  return fs_mgr.driver:setOwner(...)
+end
+
+function fs_mgr.setOwnerGroup(...)
+  return fs_mgr.driver:setOwnerGroup(...)
+end
+
+function fs_mgr.exists(...)
+  return fs_mgr.driver:exists(...)
+end
+
+function fs_mgr.isDir(...)
+  return fs_mgr.driver:isDir(...)
+end
+
+function fs_mgr.split(...)
+  return fs_mgr.driver.split(...)
 end
